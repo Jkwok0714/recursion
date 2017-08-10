@@ -20,10 +20,31 @@ var getElementsByClassName = function(className) {
   var body = document.body;
   
   //Iterate through the body
+  var iterateBody = function(body) {
   //If the nodes are matching class
-  //	Add to results
+	  if (body.classList && body.classList.contains(className)) {
+		  results.push(body);
+	  }
+ 
   //	If the nodes are lists themselves
-  //		recursively iterate them
-  //Return results
+		if (body.hasChildNodes()) {
+			//console.log(body.childNodes[0]);
+			var child = body.childNodes[0];
+			while (child) {
+				//console.log(child);
+				iterateBody(child);
+				child = child.nextSibling;
+				
+				//console.log('Called recursive on ' + body.childNodes[i]);
+			}
+		}
+	  
+  
+   }
+   
+   iterateBody(body);
+   
+   //Return results
+   return results;
 
 };
